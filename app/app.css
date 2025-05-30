@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* font-family: Audiowide, Arial, Helvetica, sans-serif; */
+}
+
+body {
+    display: flex;
+    width: 100Vw;
+    height: 100vh;
+    justify-content: center;
+    background-color: #242025;
+    overflow-x: hidden;
+}
+
+.allitem {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 3vw;
+    color: rgb(255, 217, 0);
+    text-shadow: 0 0 5px rgb(255, 217, 0),
+        0 0 10px rgb(255, 217, 0);
+    font-family: Audiowide, Arial, Helvetica, sans-serif;
+}
+
+.state {
+    display: flex;
+    height: 15vh;
+    width: 20vw;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-around;
+    /* background-color: aquamarine; */
+    font-family: Microsoft;
+    font-family: Audiowide, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+}
+
+.mineee,.openstore {
+    border: solid 5px #ffffff;
+    height: 5vh;
+    border-radius: 50px;
+    background-color: transparent;
+    box-shadow: 0 0 5px #ffffff;
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+    font-size: 1.3vw;
+    font-family: Audiowide, Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    margin: 1vh;
+}
+
+.store {
+    display: flex;
+    height: 70vh;
+    width: 20vw;
+    margin: 1vh;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* position: fixed; */
+    background-color: rgba(240, 248, 255, 0.1);
+    overflow-y: scroll;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%,-50%); */
+    border-radius: 10px;
+    filter: blur(.5px);
+    scrollbar-color: white;
+    scrollbar-width: 1px;
+}
+
+.store div {
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    font-family: Coda, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}

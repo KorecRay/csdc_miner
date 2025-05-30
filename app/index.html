@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CSDC Miner</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./app.css">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="./src/GPUData.js"></script>
+  <script type="text/babel" src="./components/Inventory.jsx"></script>
+  <script type="text/babel" src="./components/MinerButton.jsx"></script>
+  <script type="text/babel" src="./components/ShopModal.jsx"></script>
+  <script type="text/babel" src="./app.jsx"></script>
+
+  <script type="text/babel">
+    ReactDOM.render(<window.App />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
