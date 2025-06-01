@@ -22,13 +22,13 @@ window.ShopModal = function ShopModal({ show, onClose, onBuy }) {
 			{/* <h3 style={{ marginBottom: '2vh' }}>GPU Store</h3> */}
 
 			{Object.entries(grouped).map(([group, list]) => (
-				<div key={group}>
+				<div key={group} className="gpu-group">
 					<div
 						onClick={() => toggleGroup(group)}
 						style={{
 							cursor: 'pointer',
 							fontWeight: 'bold',
-							fontSize: '16px',
+							fontSize: '1.5vh',
 							borderBottom: '1px solid white',
 							paddingBottom: '4px',
 							display: 'flex',
@@ -38,15 +38,15 @@ window.ShopModal = function ShopModal({ show, onClose, onBuy }) {
 						}}
 					>
 						<span>{openGroups[group] ? '▼' : '►'} {group} Series</span>
-						<span style={{ fontSize: '12px' }}>{list.length} Items</span>
+						<span style={{ fontSize: '1.5vh' }}>{list.length} Items</span>
 					</div>
 
 					{openGroups[group] && list.map(gpu => (
-						<div key={gpu.id}>
-							<strong>{gpu.name}</strong><br />
+						<div className="store-gpu" key={gpu.id}>
+							<strong>{gpu.name}</strong>
 							Hashrate: {gpu.hashRate} / TDP: {gpu.power}W<br />
 							Price: {gpu.buyPrice} / Sell: {gpu.sellPrice}<br />
-							<button onClick={() => onBuy(gpu.id)}>Buy</button>
+							<button className="buybtn" onClick={() => onBuy(gpu.id)}>Buy</button>
 						</div>
 					))}
 				</div>
