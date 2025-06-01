@@ -9,19 +9,29 @@ window.GPU_LIST = [
   { id: 'rtx_2060', name: 'RTX 2060', hashRate: 0.000032, power: 160, buyPrice: 0.0015, sellPrice: 0.0009 },
   { id: 'rtx_2070', name: 'RTX 2070', hashRate: 0.000042, power: 175, buyPrice: 0.0020, sellPrice: 0.0011 },
   { id: 'rtx_2080', name: 'RTX 2080', hashRate: 0.000053, power: 215, buyPrice: 0.0028, sellPrice: 0.0016 },
+  { id: 'rtx_2060super', name: 'RTX 2060 Super', hashRate: 0.000036, power: 175, buyPrice: 0.0017, sellPrice: 0.0010 },
+  { id: 'rtx_2070super', name: 'RTX 2070 Super', hashRate: 0.000046, power: 215, buyPrice: 0.0023, sellPrice: 0.0014 },
+  { id: 'rtx_2080super', name: 'RTX 2080 Super', hashRate: 0.000058, power: 250, buyPrice: 0.0030, sellPrice: 0.0018 },
 
   // NVIDIA RTX 30 
+  { id: 'rtx_3050', name: 'RTX 3050', hashRate: 0.000042, power: 130, buyPrice: 0.0018, sellPrice: 0.0011 },
   { id: 'rtx_3060', name: 'RTX 3060', hashRate: 0.000055, power: 120, buyPrice: 0.0025, sellPrice: 0.0015 },
   { id: 'rtx_3060ti', name: 'RTX 3060 Ti', hashRate: 0.000060, power: 200, buyPrice: 0.0030, sellPrice: 0.0018 },
   { id: 'rtx_3070', name: 'RTX 3070', hashRate: 0.000063, power: 220, buyPrice: 0.0035, sellPrice: 0.0021 },
   { id: 'rtx_3080', name: 'RTX 3080', hashRate: 0.000090, power: 320, buyPrice: 0.0055, sellPrice: 0.0032 },
   { id: 'rtx_3090', name: 'RTX 3090', hashRate: 0.000100, power: 350, buyPrice: 0.0065, sellPrice: 0.0038 },
+  { id: 'rtx_3070ti', name: 'RTX 3070 Ti', hashRate: 0.000068, power: 290, buyPrice: 0.0040, sellPrice: 0.0024 },
+  { id: 'rtx_3080ti', name: 'RTX 3080 Ti', hashRate: 0.000098, power: 350, buyPrice: 0.0060, sellPrice: 0.0036 },
+  { id: 'rtx_3090ti', name: 'RTX 3090 Ti', hashRate: 0.000110, power: 400, buyPrice: 0.0072, sellPrice: 0.0043 },
 
   // NVIDIA RTX 40 
+  { id: 'rtx_4050', name: 'RTX 4050', hashRate: 0.000036, power: 85, buyPrice: 0.0014, sellPrice: 0.00085 },
   { id: 'rtx_4060', name: 'RTX 4060', hashRate: 0.000060, power: 115, buyPrice: 0.0028, sellPrice: 0.0016 },
   { id: 'rtx_4070', name: 'RTX 4070', hashRate: 0.000070, power: 200, buyPrice: 0.0038, sellPrice: 0.0023 },
   { id: 'rtx_4080', name: 'RTX 4080', hashRate: 0.000110, power: 320, buyPrice: 0.0070, sellPrice: 0.0042 },
   { id: 'rtx_4090', name: 'RTX 4090', hashRate: 0.000130, power: 450, buyPrice: 0.0085, sellPrice: 0.005 },
+  { id: 'rtx_4070ti', name: 'RTX 4070 Ti', hashRate: 0.000085, power: 285, buyPrice: 0.0048, sellPrice: 0.0029 },
+  { id: 'rtx_4080super', name: 'RTX 4080 Super', hashRate: 0.000115, power: 320, buyPrice: 0.0073, sellPrice: 0.0043 },
 
   // AMD RX 5000 
   { id: 'rx_5600xt', name: 'Radeon RX 5600 XT', hashRate: 0.000038, power: 150, buyPrice: 0.0014, sellPrice: 0.0009 },

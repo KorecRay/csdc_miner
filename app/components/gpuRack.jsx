@@ -36,9 +36,9 @@ window.GPUViewPanel = function GPUViewPanel() {
                                 <div className="rack-info" key={g.uuid}>
                                     <div>Model：{g.spec.name}</div>
                                     <div>UUID：{g.uuid}</div>
-                                    <div>TDP：{g.spec.power} W</div>
-                                    <div>Hashrate：{g.spec.hashRate.toFixed(8)} /sec</div>
-                                    <div style={{ color: g.on ? 'green' : 'red' }}>
+                                    {/* <div>TDP：{g.spec.power} W</div> */}
+                                    {/* <div>Hashrate：{g.spec.hashRate.toFixed(8)} /sec</div> */}
+                                    <div style={{ color: g.on ? 'rgb(100,225,100)' : 'rgb(225,100,100)' }}>
                                         State：{g.on ? 'Active' : 'Closed'}
                                     </div>
                                     <button
