@@ -33,7 +33,7 @@ window.ShopModal = function ShopModal({ show, onClose, onBuy }) {
 							paddingBottom: '4px',
 							display: 'flex',
 							alignContent: 'center',
-							width: '100%'
+							width: '100%',
 							// justifyContent: 'space-between',
 						}}
 					>
