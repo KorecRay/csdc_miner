@@ -1,11 +1,15 @@
 window.Inventory = {
 	gpus: [],
-	addGPU(id) {
-		this.gpus.push(id);
+	addGPU(gpuObj) {
+		this.gpus.push(gpuObj);
+		this.save(); // 每次操作都同步儲存
 	},
-	removeGPU(id) {
-		const index = this.gpus.indexOf(id);
-		if (index !== -1) this.gpus.splice(index, 1);
+	removeGPU(uuid) {
+		const index = this.gpus.findIndex(g => g.uuid === uuid);
+		if (index !== -1) {
+			this.gpus.splice(index, 1);
+			this.save();
+		}
 	},
 	getHashRate() {
 		let total = 0;
@@ -24,5 +28,21 @@ window.Inventory = {
 			if (data) total += data.power;
 		}
 		return total;
+	},
+	save() {
+		localStorage.setItem("gpu_list", JSON.stringify(this.gpus));
+	},
+	load() {
+		const raw = localStorage.getItem("gpu_list");
+		if (raw) {
+			try {
+				this.gpus = JSON.parse(raw);
+			} catch (e) {
+				console.warn("Invalid GPU list in storage");
+			}
+		}
 	}
 };
+
+// 載入時初始化
+window.Inventory.load();

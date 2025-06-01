@@ -7,6 +7,7 @@ window.GPUViewPanel = function GPUViewPanel() {
         if (gpu) {
             gpu.on = !gpu.on;
             setRefresh(r => r + 1); // refresh
+            window.Inventory.save();
         }
     };
 

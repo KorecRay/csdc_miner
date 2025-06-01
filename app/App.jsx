@@ -1,6 +1,9 @@
 
 window.App = function App() {
-	const [coins, setCoins] = React.useState(0);
+	const [coins, setCoins] = React.useState(() => {
+		const saved = localStorage.getItem("coins");
+		return saved ? parseFloat(saved) : 0;
+	});
 	const [showShop, setShowShop] = React.useState(false);
 	const [showGPUView, setShowGPUView] = React.useState(false);
 	const random = Math.random() * 0.0002 - 0.0001;
@@ -11,9 +14,15 @@ window.App = function App() {
 			const power = window.Inventory.getPowerUsage();
 			const mined = hashRate;
 			const cost = power * 0.0000001;
+			const net = mined - cost;
 
-			setCoins(prev => prev + mined - cost);
+			setCoins(prev => {
+				const updated = prev + net;
+				localStorage.setItem("coins", updated); // 存進 localStorage
+				return updated;
+			});
 		}, 1000);
+
 		return () => clearInterval(interval);
 	}, []);
 
