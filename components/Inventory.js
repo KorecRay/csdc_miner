@@ -4,7 +4,7 @@ window.Inventory = {
 	
 	addGPU(gpuObj) {
 		this.gpus.push(gpuObj);
-		this.save(); // 每次操作都同步儲存
+		this.save();
 	},
 	addpsu(psuObj) {
 		this.PowerSupply.push(psuObj);
@@ -86,5 +86,5 @@ window.Inventory = {
 	}
 };
 
-// 載入時初始化
+
 window.Inventory.load();
