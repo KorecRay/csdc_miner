@@ -6,7 +6,6 @@ window.App = function App() {
 	});
 	const [showShop, setShowShop] = React.useState(false);
 	const [showGPUView, setShowGPUView] = React.useState(false);
-	const random = Math.random() * 0.0002 - 0.0001;
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {

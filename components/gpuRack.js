@@ -1,7 +1,7 @@
 window.GPUViewPanel = function GPUViewPanel() {
 	const [show, setShow] = React.useState(false);
-	const [refresh, setRefresh] = React.useState(0);
-	const [openGroups, setOpenGroups] = React.useState({}); // 控制各分類開關
+	const [refresh, setRefresh] = React.useState(0); // force refresh page dom
+	const [openGroups, setOpenGroups] = React.useState({});
 
 	const toggleGPU = (uuid) => {
 		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
@@ -11,6 +11,15 @@ window.GPUViewPanel = function GPUViewPanel() {
 			window.Inventory.save();
 		}
 	};
+
+	const sellGPU = (uuid) => {
+		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
+		if (gpu) {
+			window.Inventory.removeGPU(uuid);
+			setRefresh(r => r + 1);
+			window.Inventory.save();
+		}
+	}
 
 	const grouped = {};
 	for (const gpu of window.Inventory.gpus) {
@@ -61,12 +70,23 @@ window.GPUViewPanel = function GPUViewPanel() {
 									<div style={{ color: g.on ? 'rgb(100,225,100)' : 'rgb(225,100,100)' }}>
 										State：{g.on ? 'Active' : 'Closed'}
 									</div>
-									<button
-										onClick={() => toggleGPU(g.uuid)}
-										className={g.on ? 'disconnect' : 'connect'}
-									>
-										{g.on ? '❌ disconnect' : '✅ connect'}
-									</button>
+									<div>
+										<button
+											onClick={() => toggleGPU(g.uuid)}
+											className={g.on ? 'disconnect' : 'connect'}
+										>
+											{g.on ? '❌ disconnect' : '✅ connect'}
+										</button>
+									</div>
+									<div>
+										<button
+											onClick={() => sellGPU(g.uuid)}
+											className="sellbtn"
+										>
+											Sell GPU
+										</button>
+									</div>
+
 								</div>
 							))}
 						</div>

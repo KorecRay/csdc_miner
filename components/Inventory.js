@@ -2,7 +2,7 @@ window.Inventory = {
 	gpus: [],
 	addGPU(gpuObj) {
 		this.gpus.push(gpuObj);
-		this.save(); // 每次操作都同步儲存
+		this.save();
 	},
 	removeGPU(uuid) {
 		const index = this.gpus.findIndex(g => g.uuid === uuid);
@@ -44,5 +44,5 @@ window.Inventory = {
 	}
 };
 
-// 載入時初始化
+
 window.Inventory.load();
