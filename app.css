@@ -59,6 +59,20 @@ body {
     cursor: pointer;
     margin: 1vh 0 1vh 0;
 }
+.psurackbtn {
+    border: solid 5px #ffffff;
+    height: 5vh;
+    width: 100%;
+    border-radius: 50px;
+    background-color: transparent;
+    box-shadow: 0 0 5px #ffffff;
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+    font-size: 2vh;
+    font-family: Audiowide, Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    margin: 1vh 0 1vh 0;
+}
 
 .store {
     display: flex;
@@ -150,6 +164,35 @@ body {
 /* GPU Racks */
 
 .gpu-rack {
+    display: flex;
+    height: 70vh;
+    width: 100%;
+    margin-top: 1vh;
+    margin-bottom: 5vh;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    /* position: fixed; */
+    /* background-color: rgba(240, 248, 255, .05); */
+    background-color: transparent;
+    overflow-y: scroll;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%,-50%); */
+    border-radius: 10px;
+    filter: blur(.5px);
+    scrollbar-color: white;
+    scrollbar-width: 1px;
+    scroll-padding: 0;
+    scroll-margin: 0;
+    scrollbar-base-color: blue;
+
+    border: solid 3px white;
+    color: white;
+}
+
+.psu-rack {
     display: flex;
     height: 70vh;
     width: 100%;

@@ -11,7 +11,7 @@ window.App = function App() {
 	React.useEffect(() => {
 		const interval = setInterval(() => {
 			const hashRate = window.Inventory.getHashRate();
-			const power = window.Inventory.getPowerUsage();
+			const power = window.Inventory.getGPUPowerUsage();
 			const mined = hashRate;
 			const cost = power * 0.0000001;
 			const net = mined - cost;
@@ -34,6 +34,10 @@ window.App = function App() {
 		return 'gpu-' + Math.random().toString(36).substring(2, 10);
 	}
 
+	function generatepsuUUID() {
+		return 'psu-' + Math.random().toString(36).substring(2, 10);
+	}
+
 	const handleBuy = (gpuId) => {
 		const gpuData = window.GPU_LIST.find(g => g.id === gpuId);
 		if (!gpuData) return;
@@ -52,6 +56,26 @@ window.App = function App() {
 
 		window.Inventory.addGPU(newGpu);
 		console.log("Buy in GPU:", newGpu);
+	}
+
+	const handlepsuBuy = (psuId) => {
+		const PowerSupplyData = window.PowerSupply_LIST.find(psu => psu.id === psuId);
+		if (!PowerSupplyData) return;
+		if ((coins - PowerSupplyData.buyPrice) < 0) {
+			alert("No Money")
+			return;
+		}
+		console.log("current coins: ", coins);
+		setCoins(prev => prev - PowerSupplyData.buyPrice)
+
+		const newpsu = {
+			uuid: generatepsuUUID(),
+			modelId: PowerSupplyData.id,
+			on: false, // defalut is on
+		};
+
+		window.Inventory.addpsu(newpsu);
+		console.log("Buy in Power Supply:", newpsu);
 	}
 
 	const handleSell = (id) => {
@@ -74,7 +98,8 @@ window.App = function App() {
 			<div class="state">
 				<p>Coins Owned: {coins.toFixed(6)}</p>
 				<p>Total Hashrate: {window.Inventory.getHashRate().toFixed(6)} / sec</p>
-				<p>Total Power Usage: {window.Inventory.getPowerUsage()} W</p>
+				<p>Total Power Output: {window.Inventory.getpsuPowerOutput()} W</p>
+				<p>Total Power Usage: {window.Inventory.getGPUPowerUsage()} W</p>
 			</div>
 			<window.MinerButton onMine={handleClickMine} />
 			<button className="openstore" onClick={() => setShowShop(!showShop)}>
@@ -85,8 +110,10 @@ window.App = function App() {
 				show={showShop}
 				onClose={() => setShowShop(false)}
 				onBuy={handleBuy}
+				onpsuBuy={handlepsuBuy}
 			/>
 			<GPUViewPanel />
+			<PowerSupplyViewPanel />
 		</div>
 	);
 };
