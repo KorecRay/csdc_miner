@@ -1,4 +1,4 @@
-
+// const random = parseFloat((Math.random() * 0.0004 - 0.0001).toFixed(7));
 window.App = function App() {
 	const [coins, setCoins] = React.useState(() => {
 		const saved = localStorage.getItem("coins");
@@ -15,9 +15,10 @@ window.App = function App() {
 			const cost = power * 0.0000001;
 			const net = mined - cost;
 
+
 			setCoins(prev => {
 				const updated = prev + net;
-				localStorage.setItem("coins", updated); // 存進 localStorage
+				localStorage.setItem("coins", updated);
 				return updated;
 			});
 		}, 1000);
@@ -46,7 +47,7 @@ window.App = function App() {
 		const newGpu = {
 			uuid: generateUUID(),
 			modelId: gpuData.id,
-			on: false, // defalut is on
+			on: false, // defalut is off
 		};
 
 		window.Inventory.addGPU(newGpu);
@@ -69,8 +70,8 @@ window.App = function App() {
 
 	return (
 		<div className="allitem">
-			<span class="title">CSDC Miner</span>
-			<div class="state">
+			<span className="title">CSDC Miner</span>
+			<div className="state">
 				<p>Coins Owned: {coins.toFixed(6)}</p>
 				<p>Total Hashrate: {window.Inventory.getHashRate().toFixed(6)} / sec</p>
 				<p>Total Power Usage: {window.Inventory.getPowerUsage()} W</p>

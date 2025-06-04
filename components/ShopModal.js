@@ -45,7 +45,7 @@ window.ShopModal = function ShopModal({ show, onClose, onBuy }) {
 						<div className="store-gpu" key={gpu.id}>
 							<strong>{gpu.name}</strong>
 							Hashrate: {gpu.hashRate} / TDP: {gpu.power}W<br />
-							Price: {gpu.buyPrice} / Sell: {gpu.sellPrice}<br />
+							Price: {parseFloat(gpu.buyPrice + rdn_bonus).toFixed(8)} / Sell: {gpu.sellPrice}<br />
 							<button className="buybtn" onClick={() => onBuy(gpu.id)}>Buy</button>
 						</div>
 					))}
