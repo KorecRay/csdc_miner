@@ -5,15 +5,31 @@ window.GPUViewPanel = function GPUViewPanel() {
 
 	const toggleGPU = (uuid) => {
 		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
+		const gpuId = gpu.modelId;
+		const gpuSpec = window.GPU_LIST.find(gpu => gpu.id === gpuId);
+		const PowerOutput = window.Inventory.getpsuPowerOutput();
+		const PowerUsage = window.Inventory.getGPUPowerUsage();
+		const UsablePower = PowerOutput - PowerUsage;
+
 		if (gpu) {
-			gpu.on = !gpu.on;
-			setRefresh(r => r + 1);
-			window.Inventory.save();
+			if(UsablePower >= gpuSpec.power){
+				gpu.on = !gpu.on;
+				setRefresh(r => r + 1);
+				window.Inventory.save();
+			}else{
+				alert("No Enough Power")
+			}
 		}
 	};
 
 	const sellGPU = (uuid) => {
 		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
+		const gpuId = gpu.modelId;
+		const gpuSpec = window.GPU_LIST.find(gpu => gpu.id === gpuId);
+		const PowerOutput = window.Inventory.getpsuPowerOutput();
+		const PowerUsage = window.Inventory.getGPUPowerUsage();
+		const UsablePower = PowerOutput - PowerUsage;
+
 		if (gpu) {
 			//window.Inventory.removeGPU(uuid);
 			window.App.handleSell(uuid);

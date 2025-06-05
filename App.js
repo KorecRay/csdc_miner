@@ -90,7 +90,7 @@ window.App = function App() {
 		const gpuId = gpu.modelId;
 
 		const gpuSpec = window.GPU_LIST.find(gpu => gpu.id === gpuId);
-		window.Inventory.removepsu(uuid);
+		window.Inventory.removeGPU(uuid);
 		setCoins(prev => prev + gpuSpec.sellPrice);
 	};
 

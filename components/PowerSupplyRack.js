@@ -5,22 +5,53 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 
 	const togglepsu = (uuid) => {
 		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+    const psuId = psu.modelId;
+    const psuSpec = window.PowerSupply_LIST.find(psu => psu.id === psuId);
+    const PowerOutput = window.Inventory.getpsuPowerOutput();
+		const PowerUsage = window.Inventory.getGPUPowerUsage();
+		const UsablePower = PowerOutput - PowerUsage;
+
 		if (psu) {
-			psu.on = !psu.on;
-			setRefresh(r => r + 1);
-			window.Inventory.save();
+      if(psu.on){
+        if(PowerOutput - psuSpec.power >= PowerUsage){
+          psu.on = !psu.on;
+		  	  setRefresh(r => r + 1);
+		  	  window.Inventory.save();
+        }else{
+          alert("Can't disconnect this power supply, no enough power!")
+        }
+      }else{
+        psu.on = !psu.on;
+		  	setRefresh(r => r + 1);
+		  	window.Inventory.save();
+      }
 		}
 	};
 
   const sellpsu = (uuid) => {
 		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
-		if (psu) {
-			//window.Inventory.removepsu(uuid);
-      window.App.handlepsuSell(uuid);
-			setRefresh(r => r + 1);
-			window.Inventory.save();
+    const psuId = psu.modelId;
+    const psuSpec = window.PowerSupply_LIST.find(psu => psu.id === psuId);
+    const PowerOutput = window.Inventory.getpsuPowerOutput();
+		const PowerUsage = window.Inventory.getGPUPowerUsage();
+		const UsablePower = PowerOutput - PowerUsage;
+
+    if (psu) {
+      if(psu.on){
+        if(PowerOutput - psuSpec.power >= PowerUsage){
+          window.App.handlepsuSell(uuid);
+			    setRefresh(r => r + 1);
+			    window.Inventory.save();
+        }else{
+          alert("Can't sell this power supply, no enough power!")
+        }
+      }else{
+        window.App.handlepsuSell(uuid);
+			  setRefresh(r => r + 1);
+			  window.Inventory.save();
+      }
 		}
-	}
+	};
 
 	for (const psu of window.Inventory.PowerSupply) {
 		const spec = window.PowerSupply_LIST.find(item => item.id === psu.modelId);
