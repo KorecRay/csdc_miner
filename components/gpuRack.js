@@ -15,7 +15,8 @@ window.GPUViewPanel = function GPUViewPanel() {
 	const sellGPU = (uuid) => {
 		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
 		if (gpu) {
-			window.Inventory.removeGPU(uuid);
+			//window.Inventory.removeGPU(uuid);
+			window.App.handleSell(uuid);
 			setRefresh(r => r + 1);
 			window.Inventory.save();
 		}

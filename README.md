@@ -7,6 +7,7 @@ Mining Simulation Game
 ## Authors
 
 - [@KorecRay](https://github.com/KorecRay)
+- [@chaidog2020](https://github.com/chaidog2020)
 
 
 ## Run the Demo

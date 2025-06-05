@@ -12,6 +12,16 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 		}
 	};
 
+  const sellpsu = (uuid) => {
+		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+		if (psu) {
+			//window.Inventory.removepsu(uuid);
+      window.App.handlepsuSell(uuid);
+			setRefresh(r => r + 1);
+			window.Inventory.save();
+		}
+	}
+
 	for (const psu of window.Inventory.PowerSupply) {
 		const spec = window.PowerSupply_LIST.find(item => item.id === psu.modelId);
 	}
@@ -49,6 +59,7 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 
             return (
               <div className="rack-info" key={psu.uuid}>
+                <div>
                 <div>Model：{spec.name}</div>
                 <div>UUID：{psu.uuid}</div>
                 <div style={{ color: psu.on ? 'rgb(100,225,100)' : 'rgb(225,100,100)' }}>
@@ -60,6 +71,15 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
                 >
                   {psu.on ? '❌ disconnect' : '✅ connect'}
                 </button>
+              </div>
+              <div>
+										<button
+											  onClick={() => sellpsu(psu.uuid)}
+											  className="sellbtn"
+										>
+											  Sell Power Supply
+										</button>
+								</div>
               </div>
             );
           })}

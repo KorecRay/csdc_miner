@@ -8,6 +8,11 @@ window.App = function App() {
 	const [showGPUView, setShowGPUView] = React.useState(false);
 
 	React.useEffect(() => {
+		window.App = {
+			handleSell,
+			handlepsuSell,
+		};
+
 		const interval = setInterval(() => {
 			const hashRate = window.Inventory.getHashRate();
 			const power = window.Inventory.getGPUPowerUsage();
@@ -78,19 +83,27 @@ window.App = function App() {
 		console.log("Buy in Power Supply:", newpsu);
 	}
 
-	const handleSell = (id) => {
-		const gpu = window.GPU_LIST.find(g => g.id === id);
+	const handleSell = (uuid) => {
+		const gpu = window.Inventory.gpus.find(g => g.uuid === uuid);
 		if (!gpu) return;
 
-		const owned = window.Inventory.gpus.filter(g => g === id).length;
-		if (owned > 0) {
-			window.Inventory.removeGPU(id);
-			setCoins(prev => prev + gpu.sellPrice);
-		} else {
-			alert('Sold Out!');
-		}
+		const gpuId = gpu.modelId;
+
+		const gpuSpec = window.GPU_LIST.find(gpu => gpu.id === gpuId);
+		window.Inventory.removepsu(uuid);
+		setCoins(prev => prev + gpuSpec.sellPrice);
 	};
 
+	const handlepsuSell = (uuid) => {
+		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+		if (!psu) return;
+
+		const psuId = psu.modelId;
+
+		const psuSpec = window.PowerSupply_LIST.find(psu => psu.id === psuId);
+		window.Inventory.removepsu(uuid);
+		setCoins(prev => prev + psuSpec.sellPrice);
+	};
 
 	return (
 		<div className="allitem">
