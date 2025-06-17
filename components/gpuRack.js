@@ -37,7 +37,7 @@ window.GPUViewPanel = function GPUViewPanel() {
 		const UsablePower = PowerOutput - PowerUsage;
 
 		if (gpu) {
-			//window.Inventory.removeGPU(uuid);
+			//window.Inventory.removeGPU(uuid);  this combined to handleSell
 			window.App.handleSell(uuid);
 			setRefresh(r => r + 1);
 			window.Inventory.save();

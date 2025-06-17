@@ -12,15 +12,15 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 		const UsablePower = PowerOutput - PowerUsage;
 
 		if (psu) {
-      if(psu.on){
-        if(PowerOutput - psuSpec.power >= PowerUsage){
+      if(psu.on){ //if psu is connected
+        if(PowerOutput - psuSpec.power >= PowerUsage){ //if disconnected psu won't cause a power shortage, let player disconnect psu
           psu.on = !psu.on;
 		  	  setRefresh(r => r + 1);
 		  	  window.Inventory.save();
-        }else{
+        }else{ //if player cause a power shortage
           alert("Can't disconnect this power supply, no enough power!")
         }
-      }else{
+      }else{ //if psu is disconnected, always let player connect psu
         psu.on = !psu.on;
 		  	setRefresh(r => r + 1);
 		  	window.Inventory.save();
@@ -37,7 +37,7 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 		const UsablePower = PowerOutput - PowerUsage;
 
     if (psu) {
-      if(psu.on){
+      if(psu.on){ //same logic
         if(PowerOutput - psuSpec.power >= PowerUsage){
           window.App.handlepsuSell(uuid);
 			    setRefresh(r => r + 1);

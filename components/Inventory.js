@@ -34,13 +34,13 @@ window.Inventory = {
 		return total;
 	},
 	getGPUPowerUsage() {
-		let total = 0;
+		let totalgpu = 0;
 		for (const gpu of this.gpus) {
 			if (!gpu.on) continue;
 			const data = window.GPU_LIST.find(d => d.id === gpu.modelId);
-			if (data) total += data.power;
+			if (data) totalgpu += data.power;
 		}
-		return total;
+		return totalgpu; //total power that gpu used, only works in this function
 	},
 	
 	getpsuPowerOutput() {
