@@ -35,13 +35,48 @@ window.App = function App() {
 		setCoins(prev => prev + 0.0001);
 	};
 
-	function generateUUID() {
+	//========================================================
+
+	/**
+	 * The tow func will remove in next version alters => @function generateUUID
+	*/
+	function _generateUUID() {
+		throw new Error(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
 		return 'gpu-' + Math.random().toString(36).substring(2, 10);
 	}
 
-	function generatepsuUUID() {
+	function _generatepsuUUID() {
+		throw new Error(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
 		return 'psu-' + Math.random().toString(36).substring(2, 10);
 	}
+
+	//========================================================
+
+	/**
+	 * Generate UUID for items
+	 * 
+	 * @param { string } type - Select the item type you want to generate for
+	 * 
+	 * @returns { string } str - random UUID
+	 * 
+	 * !!WARNING!! This function may return the same UUID with previous items 
+	 */
+
+	function generateUUID(type) {
+		switch (type) {
+			case "gpu":
+				return 'gpu-' + Math.random().toString(36).substring(2, 10);
+			case "psu":
+				return 'psu-' + Math.random().toString(36).substring(2, 10);
+		}
+	}
+	/**
+	 * Handle prushase on GPUss
+	 * 
+	 * @param { string } gpuId - GPU's UUID
+	 * 
+	 * This function will integrate with powersupply soon @function handlepsuBuy
+	 */
 
 	const handleBuy = (gpuId) => {
 		const gpuData = window.GPU_LIST.find(g => g.id === gpuId);
@@ -54,7 +89,7 @@ window.App = function App() {
 		setCoins(prev => prev - gpuData.buyPrice)
 
 		const newGpu = {
-			uuid: generateUUID(),
+			uuid: generateUUID("gpu"),
 			modelId: gpuData.id,
 			on: false, // defalut is off
 		};
@@ -74,7 +109,7 @@ window.App = function App() {
 		setCoins(prev => prev - PowerSupplyData.buyPrice)
 
 		const newpsu = {
-			uuid: generatepsuUUID(),
+			uuid: generatepsuUUID("psu"),
 			modelId: PowerSupplyData.id,
 			on: false, // defalut is on
 		};

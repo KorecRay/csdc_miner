@@ -1,7 +1,7 @@
 const today = new Date();
-
 const rdn = new Math.seedrandom(today.getHours());
 
+// The floating price (update everyday)
 const rdn_bonus = (rdn() * 0.001)
 console.log(rdn_bonus)
 
