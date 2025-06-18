@@ -4,7 +4,7 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 	/*const [openGroups, setOpenGroups] = React.useState({});*/
 
 	const togglepsu = (uuid) => {
-		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+		const psu = window.Inventory.psus.find(psu => psu.uuid === uuid);
     const psuId = psu.modelId;
     const psuSpec = window.PowerSupply_LIST.find(psu => psu.id === psuId);
     const PowerOutput = window.Inventory.getpsuPowerOutput();
@@ -29,7 +29,7 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 	};
 
   const sellpsu = (uuid) => {
-		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+		const psu = window.Inventory.psus.find(psu => psu.uuid === uuid);
     const psuId = psu.modelId;
     const psuSpec = window.PowerSupply_LIST.find(psu => psu.id === psuId);
     const PowerOutput = window.Inventory.getpsuPowerOutput();
@@ -53,26 +53,9 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 		}
 	};
 
-	for (const psu of window.Inventory.PowerSupply) {
+	for (const psu of window.Inventory.psus) {
 		const spec = window.PowerSupply_LIST.find(item => item.id === psu.modelId);
 	}
-
-	/*const grouped = {};
-	for (const psu of window.Inventory.PowerSupply) {
-		const spec = window.PowerSupply_LIST.find(item => item.id === psu.modelId);
-		if (!spec) continue;
-		const group = spec.id.split("_")[0].toUpperCase();
-		if (!grouped[group]) grouped[group] = [];
-		grouped[group].push({ ...psu, spec });
-	}
-
-	const toggleGroup = (group) => {
-		setOpenGroups(prev => ({
-			...prev,
-			[group]: !prev[group]
-		}));
-	}; */
-
 
 	return (
     <div>
@@ -82,9 +65,9 @@ window.PowerSupplyViewPanel = function PowerSupplyViewPanel() {
 
       {show && (
         <div className="psu-rack">
-          {window.Inventory.PowerSupply.length === 0 && <p>NULL</p>}
+          {window.Inventory.psus.length === 0 && <p>NULL</p>}
 
-          {window.Inventory.PowerSupply.map(psu => {
+          {window.Inventory.psus.map(psu => {
             const spec = window.PowerSupply_LIST.find(item => item.id === psu.modelId);
             if (!spec) return null; 
 

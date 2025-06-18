@@ -1,4 +1,3 @@
-// const random = parseFloat((Math.random() * 0.0004 - 0.0001).toFixed(7));
 window.App = function App() {
 	const [coins, setCoins] = React.useState(() => {
 		const saved = localStorage.getItem("coins");
@@ -11,6 +10,8 @@ window.App = function App() {
 		window.App = {
 			handleSell,
 			handlepsuSell,
+			generateUUID,
+			_generateUUID
 		};
 
 		const interval = setInterval(() => {
@@ -41,12 +42,12 @@ window.App = function App() {
 	 * The tow func will remove in next version alters => @function generateUUID
 	*/
 	function _generateUUID() {
-		throw new Error(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
+		console.warn(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
 		return 'gpu-' + Math.random().toString(36).substring(2, 10);
 	}
 
 	function _generatepsuUUID() {
-		throw new Error(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
+		console.warn(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
 		return 'psu-' + Math.random().toString(36).substring(2, 10);
 	}
 
@@ -109,7 +110,7 @@ window.App = function App() {
 		setCoins(prev => prev - PowerSupplyData.buyPrice)
 
 		const newpsu = {
-			uuid: generatepsuUUID("psu"),
+			uuid: generateUUID("psu"),
 			modelId: PowerSupplyData.id,
 			on: false, // defalut is on
 		};
@@ -130,7 +131,7 @@ window.App = function App() {
 	};
 
 	const handlepsuSell = (uuid) => {
-		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
+		const psu = window.Inventory.psus.find(psu => psu.uuid === uuid);
 		if (!psu) return;
 
 		const psuId = psu.modelId;
