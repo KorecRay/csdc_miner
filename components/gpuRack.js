@@ -12,12 +12,18 @@ window.GPUViewPanel = function GPUViewPanel() {
 		const UsablePower = PowerOutput - PowerUsage;
 
 		if (gpu) {
-			if (UsablePower >= gpuSpec.power) {
+			if(!gpu.on){
+				if(UsablePower >= gpuSpec.power){
+					gpu.on = !gpu.on;
+					setRefresh(r => r + 1);
+					window.Inventory.save();
+				}else{
+					alert("No Enough Power")
+				}
+			}else{
 				gpu.on = !gpu.on;
 				setRefresh(r => r + 1);
 				window.Inventory.save();
-			} else {
-				alert("No Enough Power")
 			}
 		}
 	};
@@ -31,8 +37,8 @@ window.GPUViewPanel = function GPUViewPanel() {
 		const UsablePower = PowerOutput - PowerUsage;
 
 		if (gpu) {
-			//window.Inventory.removeGPU(uuid);
-			window.App._handleSell("gpu", uuid);
+			//window.Inventory.removeGPU(uuid);  this combined to handleSell
+			window.App.handleSell(uuid);
 			setRefresh(r => r + 1);
 			window.Inventory.save();
 		}

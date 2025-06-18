@@ -1,3 +1,4 @@
+// const random = parseFloat((Math.random() * 0.0004 - 0.0001).toFixed(7));
 window.App = function App() {
 	const [coins, setCoins] = React.useState(() => {
 		const saved = localStorage.getItem("coins");
@@ -9,7 +10,6 @@ window.App = function App() {
 	React.useEffect(() => {
 		window.App = {
 			handleSell,
-			_handleSell,
 			handlepsuSell,
 		};
 
@@ -35,18 +35,11 @@ window.App = function App() {
 		setCoins(prev => prev + 0.0001);
 	};
 
-	//========================================================
-
-	/**
-	 * The tow func will remove in next version alters => @function generateUUID
-	*/
-	function _generateUUID() {
-		console.warn(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
+	function generateUUID() {
 		return 'gpu-' + Math.random().toString(36).substring(2, 10);
 	}
 
-	function _generatepsuUUID() {
-		console.warn(`This function has been deprecated in previous versions. Use function ${generateUUID} instead.`)
+	function generatepsuUUID() {
 		return 'psu-' + Math.random().toString(36).substring(2, 10);
 	}
 
@@ -81,7 +74,7 @@ window.App = function App() {
 		setCoins(prev => prev - PowerSupplyData.buyPrice)
 
 		const newpsu = {
-			uuid: generateUUID("psu"),
+			uuid: generatepsuUUID(),
 			modelId: PowerSupplyData.id,
 			on: false, // defalut is on
 		};
@@ -102,7 +95,7 @@ window.App = function App() {
 	};
 
 	const handlepsuSell = (uuid) => {
-		const psu = window.Inventory.psus.find(psu => psu.uuid === uuid);
+		const psu = window.Inventory.PowerSupply.find(psu => psu.uuid === uuid);
 		if (!psu) return;
 
 		const psuId = psu.modelId;
@@ -111,32 +104,6 @@ window.App = function App() {
 		window.Inventory.removepsu(uuid);
 		setCoins(prev => prev + psuSpec.sellPrice);
 	};
-
-	/**
-	 * @param { string } type - 
-	 * @param { string } uuid - 
-	 * 
-	 * @returns {} - default none
-	 */
-	const _handleSell = (type, uuid) => {
-		const item = window.Inventory[`${type}s`].find(g => g.uuid === uuid);
-		if (!item) return;
-		console.log(item)
-		const modelID = item.modelID;
-		var itemSpec = null;
-		switch (type) {
-			case "gpu":
-				itemSpec = window.PowerSupply_LIST.find(item => item.id === modelID);
-				window.Inventory.removeGPU(uuid);
-				break;
-			case "psu":
-				itemSpec = window.GPU_LIST.find(item => item.id === modelID);
-				window.Inventory.removepsu(uuid);
-				break;
-		}
-		setCoins(prev => prev + itemSpec.sellPrice);
-
-	}
 
 	return (
 		<div className="allitem">

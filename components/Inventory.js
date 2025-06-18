@@ -1,13 +1,13 @@
 window.Inventory = {
 	gpus: [],
-	psu: [],
+	PowerSupply: [],
 	
 	addGPU(gpuObj) {
 		this.gpus.push(gpuObj);
 		this.save();
 	},
 	addpsu(psuObj) {
-		this.psus.push(psuObj);
+		this.PowerSupply.push(psuObj);
 		this.save(); // 每次操作都同步儲存
 	},
 	removeGPU(uuid) {
@@ -18,9 +18,9 @@ window.Inventory = {
 		}
 	},
 	removepsu(uuid) {
-		const psuindex = this.psus.findIndex(psu => psu.uuid === uuid);
+		const psuindex = this.PowerSupply.findIndex(psu => psu.uuid === uuid);
 		if (psuindex !== -1) {
-			this.psus.splice(psuindex, 1);
+			this.PowerSupply.splice(psuindex, 1);
 			this.save();
 		}
 	},
@@ -45,7 +45,7 @@ window.Inventory = {
 	
 	getpsuPowerOutput() {
 		let totalpsu = 0;
-		for (const psu of this.psus) {
+		for (const psu of this.PowerSupply) {
 			if (!psu.on) continue;
 			const data = window.PowerSupply_LIST.find(d => d.id === psu.modelId);
 			if (data) totalpsu += data.power;
@@ -60,7 +60,7 @@ window.Inventory = {
 
 	save() {
 		localStorage.setItem("gpu_list", JSON.stringify(this.gpus));
-		localStorage.setItem("psu_list", JSON.stringify(this.psus));
+		localStorage.setItem("psu_list", JSON.stringify(this.PowerSupply));
 
 		const TotalPowerUsage = this.TotalPowerUsage();
     	localStorage.setItem("TotalPowerUsage", JSON.stringify(TotalPowerUsage));
@@ -78,7 +78,7 @@ window.Inventory = {
 		const rawpsu = localStorage.getItem("psu_list");
 		if (rawpsu) {
 			try {
-				this.psus = JSON.parse(rawpsu);
+				this.PowerSupply = JSON.parse(rawpsu);
 			} catch (e) {
 				console.warn("Invalid psu list in storage");
 			}
